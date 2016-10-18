@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="start-screen">
+  <div id="start-screen" class="show">
     <pre>
         _____                       _   _            _____                                    _ 
        / ____|                     | | | |          |  __ \                                  | |
@@ -19,6 +19,10 @@
     <p>Given a list of potential passwords, try to guess the correct one.</p>
     <p>If you're wrong, we'll tell you how many letters are correct.</p>
     <button id="start">Start</button>
+  </div>
+  <div id="game-screen" class="hide">
+    <ul id="word-list"></div>
+    <div id="status"></div>
   </div>
   <script src="words.js"></script>
   <script src="app.js"></script>

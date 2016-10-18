@@ -8,8 +8,23 @@ body {
   background: black;
 }
 
-#start-screen {
+#start-screen,
+#game-screen {
   text-align: center;
+  overflow: hidden; 
+}
+
+#start-screen.show,
+#game-screen.show {
+  max-height: 1000px;
+  transition-duration: 1s;
+  transition-delay: 1s;
+}
+
+#start-screen.hide,
+#game-screen.hide {
+  max-height: 0;
+  transition-duration: 1s;
 }
 
 #start {
@@ -30,4 +45,14 @@ body {
 #start:active,
 #start:focus {
   outline: none;
+}
+
+#word-list {
+  list-style-type: none;
+}
+
+#word-list > li:hover {
+  color: yellow;
+  font-size: 1.5em;
+  cursor: pointer;
 }

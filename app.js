@@ -1,4 +1,27 @@
+var wordCount = 12;
+var guessCount = 4;
 
+var start = document.getElementById('start');
+start.addEventListener('click', function() {
+  var startScreen = document.getElementById('start-screen');
+  var gameScreen = document.getElementById('game-screen');
+  startScreen.classList.toggle('hide');
+  startScreen.classList.toggle('show');
+  gameScreen.classList.toggle('show');
+  gameScreen.classList.toggle('hide');
+  startGame();
+});
+
+function startGame() {
+  var wordList = document.getElementById("word-list");
+  var randomWords = getRandomValues(words, 12);
+  randomWords.forEach(function(word) {
+    var li = document.createElement("li");
+    li.innerText = word;
+    wordList.appendChild(li);
+  });
+  var password = getRandomValues(randomWords, 1)[0];
+}
 
 function shuffle(array) {
   var arrayCopy = array.slice();
