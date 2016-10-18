@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function startGame() {
     // get random words and append them to the DOM
     let wordList = document.getElementById("word-list");
-    let randomWords = getRandomValues(words, wordCount);
+    let randomWords = getRandomValues(words);
     randomWords.forEach(word => {
       let li = document.createElement("li");
       li.innerText = word;
@@ -88,6 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return arrayCopy;
   }
 
-  let getRandomValues = (array, numVals) => shuffle(array).slice(0,numVals);
+  let getRandomValues = (array, numVals=wordCount) => shuffle(array).slice(0,numVals);
 
 });
