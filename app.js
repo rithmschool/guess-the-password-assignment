@@ -1,5 +1,6 @@
 var wordCount = 15;
 var guessCount = 4;
+var password = '';
 
 var start = document.getElementById('start');
 start.addEventListener('click', function() {
@@ -13,31 +14,37 @@ start.addEventListener('click', function() {
 function startGame() {
   var wordList = document.getElementById("word-list");
   var guessesRemaining = document.getElementById("guesses-remaining");
-  var winner = document.getElementById("winner");
-  var loser = document.getElementById("loser");
   var randomWords = getRandomValues(words, wordCount);
   randomWords.forEach(function(word) {
     var li = document.createElement("li");
     li.innerText = word;
     wordList.appendChild(li);
   });
-  var password = getRandomValues(randomWords, 1)[0];
-  wordList.addEventListener('click', function(e) {
-    if (e.target.tagName === "LI" && !e.target.classList.contains("disabled")) {
-      var guess = e.target.innerText;
-      var similarityScore = compareWords(guess, password);
-      e.target.classList.add("disabled");
-      e.target.innerText = e.target.innerText + " --> Matching Letters: " + similarityScore;
-      guessCount--;
-      guessesRemaining.innerText = "Guesses remaining: " + guessCount + ".";
-      if (similarityScore === password.length) {
-        toggleClasses(winner, 'hide', 'show');
-      } else if (guessCount === 0) {
-        toggleClasses(loser, 'hide', 'show');
-      }
+  password = getRandomValues(randomWords, 1)[0];
+  wordList.addEventListener('click', updateGame);
+  setGuessCount(guessCount);
+}
+
+function updateGame(e) {
+  if (e.target.tagName === "LI" && !e.target.classList.contains("disabled")) {
+    var guess = e.target.innerText;
+    var similarityScore = compareWords(guess, password);
+    e.target.classList.add("disabled");
+    e.target.innerText = e.target.innerText + " --> Matching Letters: " + similarityScore;
+    setGuessCount(guessCount - 1);
+    if (similarityScore === password.length) {
+      toggleClasses(document.getElementById("winner"), 'hide', 'show');
+      this.removeEventListener('click', updateGame);
+    } else if (guessCount === 0) {
+      toggleClasses(document.getElementById("loser"), 'hide', 'show');
+      this.removeEventListener('click', updateGame);
     }
-  });
-  guessesRemaining.innerText = "Guesses remaining: " + guessCount + ".";
+  }
+}
+
+function setGuessCount(newCount) {
+  guessCount = newCount;
+  document.getElementById("guesses-remaining").innerText = "Guesses remaining: " + guessCount + ".";
 }
 
 function toggleClasses(element) {
