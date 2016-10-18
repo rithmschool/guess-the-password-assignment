@@ -11,19 +11,22 @@ body {
 #start-screen,
 #game-screen {
   text-align: center;
-  overflow: hidden; 
+  overflow: hidden;  
 }
 
-#start-screen.show,
 #game-screen.show {
-  max-height: 1000px;
-  transition-duration: 1s;
   transition-delay: 1s;
 }
 
-#start-screen.hide,
-#game-screen.hide {
+.show {
+  max-height: 1000px;
+  transition-duration: 1s;
+  display: block;
+}
+
+.hide {
   max-height: 0;
+  overflow: hidden;
   transition-duration: 1s;
 }
 
@@ -49,9 +52,18 @@ body {
 
 #word-list {
   list-style-type: none;
+  padding: 0;
 }
 
-#word-list > li:hover {
+#word-list > li {
+  padding: 5px;
+}
+
+#word-list > li.disabled {
+  color: #ccc;
+}
+
+#word-list > li:not(.disabled):hover {
   color: yellow;
   font-size: 1.5em;
   cursor: pointer;
