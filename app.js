@@ -83,9 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let idx2 = Math.floor(Math.random() * (idx1 + 1));
 
       // swap elements at idx1 and idx2
-      let temp = arrayCopy[idx1];
-      arrayCopy[idx1] = arrayCopy[idx2];
-      arrayCopy[idx2] = temp;
+      [arrayCopy[idx1], arrayCopy[idx2]] = [arrayCopy[idx2], arrayCopy[idx1]];
     }
     return arrayCopy;
   }
