@@ -63,10 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("guesses-remaining").innerText = `Guesses remaining: ${guessCount}.`;
   }
 
-  function toggleClasses(element) {
-    for (let i = 1; i < arguments.length; i++) {
-      element.classList.toggle(arguments[i]);
-    }
+  function toggleClasses(element, ...classNames) {
+    classNames.forEach(name => element.classList.toggle(name));
   }
 
   function compareWords(word1, word2) {
