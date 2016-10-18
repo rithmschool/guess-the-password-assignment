@@ -6,7 +6,7 @@
 // 4. arrow functions
 // 5. rest
 // 6. destructuring assignment
-// bonus: default params?
+// 7. default params
 
 document.addEventListener('DOMContentLoaded', () => {
   const wordCount = 15;
