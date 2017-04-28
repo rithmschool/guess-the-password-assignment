@@ -54,15 +54,15 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function toggleClasses(element) {
-    for (var i = 1; i < arguments.length; i++) {
+    for (let i = 1; i < arguments.length; i++) {
       element.classList.toggle(arguments[i]);
     }
   }
 
   function compareWords(word1, word2) {
     if (word1.length !== word2.length) throw "Words must have the same length";
-    var count = 0;
-    for (var i = 0; i < word1.length; i++) {
+    let count = 0;
+    for (let i = 0; i < word1.length; i++) {
       if (word1[i] === word2[i]) count++;
     }
     return count;
