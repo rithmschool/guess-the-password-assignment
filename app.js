@@ -9,7 +9,7 @@
 // 7. default params
 
 document.addEventListener('DOMContentLoaded', () => {
-  const wordCount = 15;
+  const wordCount = 10;
   let guessCount = 4;
   let password = '';
 
@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleClasses(document.getElementById('game-screen'), 'hide', 'show');
     startGame();
   });
+
+  function toggleClasses(element, ...classNames) {
+    classNames.forEach(name => element.classList.toggle(name));
+  }
 
   function startGame() {
     // get random words and append them to the DOM
@@ -36,6 +40,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // add update listener for clicking on a word
     wordList.addEventListener('click', updateGame);
+  }
+
+  let getRandomValues = (array, numVals=wordCount) => shuffle(array).slice(0,numVals);
+
+  function shuffle(array) {
+    let arrayCopy = array.slice();
+    for (let idx1 = arrayCopy.length - 1; idx1 > 0; idx1--) {
+      // generate a random index between 0 and idx1 (inclusive)
+      let idx2 = Math.floor(Math.random() * (idx1 + 1));
+
+      // swap elements at idx1 and idx2
+      [arrayCopy[idx1], arrayCopy[idx2]] = [arrayCopy[idx2], arrayCopy[idx1]];
+    }
+    return arrayCopy;
+  }
+
+  function setGuessCount(newCount) {
+    guessCount = newCount;
+    document.getElementById("guesses-remaining").innerText = `Guesses remaining: ${guessCount}.`;
   }
 
   function updateGame(e) {
@@ -58,15 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function setGuessCount(newCount) {
-    guessCount = newCount;
-    document.getElementById("guesses-remaining").innerText = `Guesses remaining: ${guessCount}.`;
-  }
-
-  function toggleClasses(element, ...classNames) {
-    classNames.forEach(name => element.classList.toggle(name));
-  }
-
   function compareWords(word1, word2) {
     if (word1.length !== word2.length) throw "Words must have the same length";
     let count = 0;
@@ -76,18 +90,5 @@ document.addEventListener('DOMContentLoaded', () => {
     return count;
   }
 
-  function shuffle(array) {
-    let arrayCopy = array.slice();
-    for (let idx1 = arrayCopy.length - 1; idx1 > 0; idx1--) {
-      // generate a random index between 0 and idx1 (inclusive)
-      let idx2 = Math.floor(Math.random() * (idx1 + 1));
-
-      // swap elements at idx1 and idx2
-      [arrayCopy[idx1], arrayCopy[idx2]] = [arrayCopy[idx2], arrayCopy[idx1]];
-    }
-    return arrayCopy;
-  }
-
-  let getRandomValues = (array, numVals=wordCount) => shuffle(array).slice(0,numVals);
 
 });
