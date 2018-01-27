@@ -1,5 +1,5 @@
 $(function() {
-  var wordCount = 15;
+  var wordCount = 10;
   var guessCount = 4;
   var password = '';
 
